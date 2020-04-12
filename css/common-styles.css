@@ -1,0 +1,24 @@
+.small-padding-top	{
+	padding-top: 10px;
+}
+.medium-padding-top {
+	padding-top:20px;
+}
+.list-item:nth-of-type(even) {
+	color:white;
+}
+.list-item:nth-of-type(odd) {
+	color:brown;
+}
+.large-padding-top {
+	padding-top:30px;
+}
+.hide-me {
+	
+}
+.button-100px-width {
+	width:100px;
+}
+.invissible {
+	display:none;
+}

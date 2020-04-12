@@ -1,0 +1,45 @@
+USE `notebook`;
+
+-- add student:
+INSERT INTO `student` (`STUDENT_ID`, `STUDENT_FNAME`, `STUDENT_LNAME`, `DATE_OF_BIRTH`, `GENDER`) VALUES (NULL, 'John', 'Rambo', '1995-02-05', 'Male');
+
+-- add professors:
+INSERT INTO `professor` (`PROFESSOR_ID`, `PROFESSOR_FNAME`, `PROFESSOR_LNAME`) VALUES (NULL, 'Steve', 'Camper');
+INSERT INTO `professor` (`PROFESSOR_ID`, `PROFESSOR_FNAME`, `PROFESSOR_LNAME`) VALUES (NULL, 'Seema', 'Kapoor');
+INSERT INTO `professor` (`PROFESSOR_ID`, `PROFESSOR_FNAME`, `PROFESSOR_LNAME`) VALUES (NULL, 'Stacy', 'Palmer');
+
+-- add semesters:
+INSERT INTO `semester` (`SEMESTER_ID`, `SEMESTER_NAME`, `SEMESTER_DESCRIPTION`, `SEMESTER_SART_DATE`, `SEMESTER_END_DATE`) VALUES (NULL, 'Spring 2020', 'Spring 2020 - sem1', '2020-01-07', '2020-05-08');
+INSERT INTO `semester` (`SEMESTER_ID`, `SEMESTER_NAME`, `SEMESTER_DESCRIPTION`, `SEMESTER_SART_DATE`, `SEMESTER_END_DATE`) VALUES (NULL, 'Summer-I 2020', 'Summer-I 2020 - sem2', '2020-05-18', '2020-06-19');
+INSERT INTO `semester` (`SEMESTER_ID`, `SEMESTER_NAME`, `SEMESTER_DESCRIPTION`, `SEMESTER_SART_DATE`, `SEMESTER_END_DATE`) VALUES (NULL, 'Summer-II 2020', 'Summer-II 2020 - sem2', '2020-06-25', '2020-08-07');
+INSERT INTO `semester` (`SEMESTER_ID`, `SEMESTER_NAME`, `SEMESTER_DESCRIPTION`, `SEMESTER_SART_DATE`, `SEMESTER_END_DATE`) VALUES (NULL, 'Fall 2020', 'Fall 2020 - sem3', '2020-08-17', '2020-12-17');
+INSERT INTO `semester` (`SEMESTER_ID`, `SEMESTER_NAME`, `SEMESTER_DESCRIPTION`, `SEMESTER_SART_DATE`, `SEMESTER_END_DATE`) VALUES (NULL, 'Spring 2021', 'Spring 2021 - sem1', '2021-01-11', '2021-05-07');
+
+-- add subjects
+INSERT INTO `subject` (`SUBJECT_ID`, `SUBJECT_NAME`, `SUBJECT_CODE`, `SUBJECT_DESCRITION`) VALUES (NULL, 'Advanced analysis & design', 'CIS 5111', 'Object oriented analysis and design');
+INSERT INTO `subject` (`SUBJECT_ID`, `SUBJECT_NAME`, `SUBJECT_CODE`, `SUBJECT_DESCRITION`) VALUES (NULL, 'Managing information security in organizations', 'CIS 5112', 'Introduction to information security');
+INSERT INTO `subject` (`SUBJECT_ID`, `SUBJECT_NAME`, `SUBJECT_CODE`, `SUBJECT_DESCRITION`) VALUES (NULL, 'Advanced Java programming', 'CIS 5113', 'Advanced Java - Spring, lambdas, streams');
+INSERT INTO `subject` (`SUBJECT_ID`, `SUBJECT_NAME`, `SUBJECT_CODE`, `SUBJECT_DESCRITION`) VALUES (NULL, 'Internet for the interprise', 'CIS 5114', 'HTML, CSS, PHP, JAVASCRIPT');
+
+-- add classes
+INSERT INTO `class` (`CLASS_ID`, `SEMESTER_ID`, `SUBJECT_ID`, `PROFESSOR_ID`) 
+VALUES (NULL, (SELECT `SEMESTER_ID`  FROM `SEMESTER`  WHERE `SEMESTER_NAME` = 'Spring 2020'), 
+              (SELECT `SUBJECT_ID`   FROM `SUBJECT`   WHERE `SUBJECT_NAME` = 'Advanced analysis & design'), 
+              (SELECT `PROFESSOR_ID` FROM `PROFESSOR` WHERE `PROFESSOR_FNAME` = 'Steve' AND `PROFESSOR_LNAME` = 'Camper'));
+INSERT INTO `class` (`CLASS_ID`, `SEMESTER_ID`, `SUBJECT_ID`, `PROFESSOR_ID`) 
+VALUES (NULL, (SELECT `SEMESTER_ID`  FROM `SEMESTER`  WHERE `SEMESTER_NAME` = 'Spring 2020'), 
+              (SELECT `SUBJECT_ID`   FROM `SUBJECT`   WHERE `SUBJECT_NAME` = 'Managing information security in organizations'), 
+              (SELECT `PROFESSOR_ID` FROM `PROFESSOR` WHERE `PROFESSOR_FNAME` = 'Stacy' AND `PROFESSOR_LNAME` = 'Palmer'));
+INSERT INTO `class` (`CLASS_ID`, `SEMESTER_ID`, `SUBJECT_ID`, `PROFESSOR_ID`) 
+VALUES (NULL, (SELECT `SEMESTER_ID`  FROM `SEMESTER`  WHERE `SEMESTER_NAME` = 'Spring 2020'), 
+              (SELECT `SUBJECT_ID`   FROM `SUBJECT`   WHERE `SUBJECT_NAME` = 'Advanced Java programming'), 
+              (SELECT `PROFESSOR_ID` FROM `PROFESSOR` WHERE `PROFESSOR_FNAME` = 'Stacy' AND `PROFESSOR_LNAME` = 'Palmer'));
+INSERT INTO `class` (`CLASS_ID`, `SEMESTER_ID`, `SUBJECT_ID`, `PROFESSOR_ID`) 
+VALUES (NULL, (SELECT `SEMESTER_ID`  FROM `SEMESTER`  WHERE `SEMESTER_NAME` = 'Spring 2020'), 
+              (SELECT `SUBJECT_ID`   FROM `SUBJECT`   WHERE `SUBJECT_NAME` = 'Internet for the interprise'), 
+              (SELECT `PROFESSOR_ID` FROM `PROFESSOR` WHERE `PROFESSOR_FNAME` = 'Seema' AND `PROFESSOR_LNAME` = 'Kapoor'));
+
+-- regsiter student to classes (done by subject/course page in application) -- INSERT MANUALLY
+INSERT INTO `student_class_xref` (`STUDENT_CLASS_XREF_ID`, `STUDENT_ID`, `CLASS_ID`) VALUES (NULL, '1', '1');
+INSERT INTO `student_class_xref` (`STUDENT_CLASS_XREF_ID`, `STUDENT_ID`, `CLASS_ID`) VALUES (NULL, '1', '2');
+INSERT INTO `student_class_xref` (`STUDENT_CLASS_XREF_ID`, `STUDENT_ID`, `CLASS_ID`) VALUES (NULL, '1', '3');
